@@ -13,6 +13,9 @@ _setosa = 0
 _versicolor = 1
 _virginica = 2
 
+# TODO: Correct validation/testing split
+# TODO: Implemnt KNN with L1, L2 and K = 1, 3, 5 ...
+# TODO: Check results (Accuracy, )
 
 ## Read dataset Comma sep val
 ## This is only for this use case, not general use.
@@ -48,8 +51,11 @@ def splitData(data:list[list])-> (list, list):
     trainingList = data[30:]
     return trainingList, validationList
 
-def NearestNieghbor(Training:list, Test:list) -> int:
-    pass
+def NearestNieghbor(training:list, test:list) -> int:
+    # Perform L2 distance (Sum of squared diff)
+    for i in range(training):
+        diff = numpy.subtract(test[:4], training[0][:4])
+    #print(diff)
 
 if __name__ == '__main__':
     data = readCSV('Iris.csv')
@@ -60,5 +66,5 @@ if __name__ == '__main__':
     # and classify
     # In reality, we have the label, but we want to predict as if we don't know.
     for row in range(len(dataTest)):
-        #print(row ,dataTest[row])
-        result = NearestNieghbor(dataTrain, dataTest[row])
+        print(row ,dataTest[row])
+        #result = NearestNieghbor(dataTrain, dataTest[row])
