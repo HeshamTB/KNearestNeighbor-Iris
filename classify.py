@@ -1,4 +1,4 @@
-#/bin/env python
+#!/bin/env python
 
 # Hesham T. Banafa
 # EE482 Assignment 1 (KNN on Iris dataset)
@@ -6,6 +6,7 @@
 
 import sys
 
+# Split 30 validation, 120 for training.
 ## Constants for readable access.
 _setosa = 0
 _versicolor = 1
@@ -29,5 +30,21 @@ def readCSV(filename)-> list:
                 exit(1)
     return data
 
+"""
+Returns (120, 30) random split
+"""
+def splitData(data:list[list])-> (list, list):
+    # Goal is to split 30/120
+    # one way is to random shuffle then take 30/120
+    import random
+    random.shuffle(data)
+    trainingList = data[:30]
+    validationList = data[30:]
+    return trainingList, validationList
+
 if __name__ == '__main__':    
     data = readCSV('Iris.csv')
+    dataTrain, x = splitData(data)
+    print("All data elemtns ", len(data))
+    print("dataTrain ", len(dataTrain))
+    print("valdTrain ", len(x))
