@@ -5,6 +5,7 @@
 # Fall 2021
 
 import sys
+import numpy
 
 # Split 30 validation, 120 for training.
 ## Constants for readable access.
@@ -24,7 +25,12 @@ def readCSV(filename)-> list:
         for row in csvReader:
             #print(row, type(row))
             if (type(row) == list and len(row) == 6): # Sanity checks
-                data.append(row)
+                try:
+                    # This removes ID col
+                    row = [float(row[1]),float(row[2]),float(row[3]),float(row[4]),row[5]]
+                    data.append(row)
+                except ValueError as ex:
+                    pass # probably first line
             else:
                 print('error reading file', file=sys.stderr)
                 exit(1)
@@ -42,9 +48,11 @@ def splitData(data:list[list])-> (list, list):
     validationList = data[30:]
     return trainingList, validationList
 
+def NearestNieghbor(Training:list, Test:list) -> int:
+    pass
+
 if __name__ == '__main__':    
     data = readCSV('Iris.csv')
-    dataTrain, x = splitData(data)
-    print("All data elemtns ", len(data))
-    print("dataTrain ", len(dataTrain))
-    print("valdTrain ", len(x))
+    dataTrain, dataTest = splitData(data)
+    n = numpy.subtract(dataTrain[0][:4], dataTest[0][:4])
+    print(n)
