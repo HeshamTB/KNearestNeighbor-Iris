@@ -44,15 +44,21 @@ def splitData(data:list[list])-> (list, list):
     # one way is to random shuffle then take 30/120
     import random
     random.shuffle(data)
-    trainingList = data[:30]
-    validationList = data[30:]
+    validationList = data[:30]
+    trainingList = data[30:]
     return trainingList, validationList
 
 def NearestNieghbor(Training:list, Test:list) -> int:
     pass
 
-if __name__ == '__main__':    
+if __name__ == '__main__':
     data = readCSV('Iris.csv')
     dataTrain, dataTest = splitData(data)
-    n = numpy.subtract(dataTrain[0][:4], dataTest[0][:4])
-    print(n)
+    #n = numpy.subtract(dataTrain[0][:4], dataTest[0][:4])
+    #print(n)
+    # Loop every test data point
+    # and classify
+    # In reality, we have the label, but we want to predict as if we don't know.
+    for row in range(len(dataTest)):
+        #print(row ,dataTest[row])
+        result = NearestNieghbor(dataTrain, dataTest[row])
