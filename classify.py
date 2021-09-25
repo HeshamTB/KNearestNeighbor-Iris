@@ -1,6 +1,6 @@
 #!/bin/env python
 
-# Hesham T. Banafa
+# Hesham T. Banafa, Al-Fahad Filmban
 # EE482 Assignment 1 (KNN on Iris dataset)
 # Fall 2021
 
