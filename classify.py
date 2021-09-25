@@ -14,7 +14,6 @@ _setosa = 0
 _versicolor = 1
 _virginica = 2
 
-# TODO: Correct validation/testing split
 # TODO: Implemnt KNN with L1, L2 and K = 1, 3, 5 ...
 # TODO: Check results (Accuracy, )
 
@@ -63,6 +62,7 @@ if __name__ == '__main__':
         K = int(sys.argv[1])
     except IndexError:
         K = 3 # Default
+    # This is highly not scalable.
     for i in range(0, 50, 10):
         # Validation split
         print('Fold ', int(i/10 +1)) 
