@@ -39,17 +39,6 @@ def readCSV(filename)-> list:
                 exit(1)
     return data
 
-"""
-Returns (120, 30) random split
-"""
-def splitData(data:list[list])-> (list, list):
-    # Goal is to split 30/120
-    # one way is to random shuffle then take 30/120
-    import random
-    random.shuffle(data)
-    validationList = data[:30]
-    trainingList = data[30:]
-    return trainingList, validationList
 
 def NearestNieghbor(training:list, test:list) -> int:
     # Perform L2 distance (Sum of squared diff)
@@ -59,12 +48,12 @@ def NearestNieghbor(training:list, test:list) -> int:
 
 if __name__ == '__main__':
     data = readCSV('Iris.csv')
-    dataTrain, dataTest = splitData(data)
-    #n = numpy.subtract(dataTrain[0][:4], dataTest[0][:4])
-    #print(n)
-    # Loop every test data point
-    # and classify
-    # In reality, we have the label, but we want to predict as if we don't know.
-    for row in range(len(dataTest)):
-        print(row ,dataTest[row])
-        #result = NearestNieghbor(dataTrain, dataTest[row])
+    for i in range(0, 40, 10):
+       print(i, i+10)
+       print(i+50, i+50+10)
+       print(i+100, i+100+10)
+       dataValidate = data[i:i+10]
+       dataValidate.extend(data[i+50:i+50+10])
+       dataValidate.extend(data[i+100:i+100+10])
+       for j, v in enumerate(dataValidate):
+           print(i ,j, v)
