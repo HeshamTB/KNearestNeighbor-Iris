@@ -61,6 +61,7 @@ if __name__ == '__main__':
     data = readCSV('Iris.csv')
     for i in range(0, 50, 10):
         # Validation split
+        print('Fold ', int(i/10 +1)) 
         dataValidate = list()
         dataValidate = data[i:i+10]
         dataValidate.extend(data[i+50:i+50+10])
@@ -81,8 +82,12 @@ if __name__ == '__main__':
         # At this point we have data ready to be classifed for Kth fold.
         for i, testPoint in enumerate(dataValidate):
             distanceList = list() # This list should mapped directly to dataValidate list
-            for j, trainPoint in enumerate(dataTrain):
-                distance = EuclideanD(testPoint, trainPoint)
-                print(distance)
+            for j, trainPoint in enumerate(dataTrain): # For every train point
+                distance = EuclideanD(testPoint, trainPoint) # L2 distance
+                #print(distance)
                 distanceList.append([distance, trainPoint, testPoint])
-            print(distanceList)
+            distanceList.sort(key=lambda dist: dist[0])
+            topK = distanceList[:15]
+            for j in topK: print(j)
+            print('='*24)
+            #print(distanceList)
