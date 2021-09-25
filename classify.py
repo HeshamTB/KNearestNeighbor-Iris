@@ -6,6 +6,7 @@
 
 import sys
 import numpy
+import math
 
 # Split 30 validation, 120 for training.
 ## Constants for readable access.
@@ -46,6 +47,16 @@ def NearestNieghbor(training:list, test:list) -> int:
         diff = numpy.subtract(test[:4], training[0][:4])
     #print(diff)
 
+def EuclideanD(Mypoint=[],MappedPoint=[]):
+
+    #I have four variable W, X, Y, Z
+    #Euclidean Distance d = root( (X2-X1)^2  + (Y2-Y1)^2 +....   )
+    Distance=math.sqrt( math.pow((MappedPoint[0]-Mypoint[0]),2)+
+        math.pow((MappedPoint[1]-Mypoint[1]),2)+
+        math.pow((MappedPoint[2]-Mypoint[2]),2)+
+        math.pow((MappedPoint[3]-Mypoint[3]),2))
+    return Distance
+
 if __name__ == '__main__':
     data = readCSV('Iris.csv')
     for i in range(0, 50, 10):
@@ -68,3 +79,10 @@ if __name__ == '__main__':
         dataTrain.extend(data_temp3)
         
         # At this point we have data ready to be classifed for Kth fold.
+        for i, testPoint in enumerate(dataValidate):
+            distanceList = list() # This list should mapped directly to dataValidate list
+            for j, trainPoint in enumerate(dataTrain):
+                distance = EuclideanD(testPoint, trainPoint)
+                print(distance)
+                distanceList.append([distance, trainPoint, testPoint])
+            print(distanceList)
