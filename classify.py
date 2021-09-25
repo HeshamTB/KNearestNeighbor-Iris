@@ -59,7 +59,10 @@ def EuclideanD(Mypoint=[],MappedPoint=[]):
 
 if __name__ == '__main__':
     data = readCSV('Iris.csv')
-    K = int(sys.argv[1])
+    try:
+        K = int(sys.argv[1])
+    except IndexError:
+        K = 3 # Default
     for i in range(0, 50, 10):
         # Validation split
         print('Fold ', int(i/10 +1)) 
