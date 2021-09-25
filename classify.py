@@ -48,12 +48,23 @@ def NearestNieghbor(training:list, test:list) -> int:
 
 if __name__ == '__main__':
     data = readCSV('Iris.csv')
-    for i in range(0, 40, 10):
-       print(i, i+10)
-       print(i+50, i+50+10)
-       print(i+100, i+100+10)
-       dataValidate = data[i:i+10]
-       dataValidate.extend(data[i+50:i+50+10])
-       dataValidate.extend(data[i+100:i+100+10])
-       for j, v in enumerate(dataValidate):
-           print(i ,j, v)
+    for i in range(0, 50, 10):
+        # Validation split
+        dataValidate = list()
+        dataValidate = data[i:i+10]
+        dataValidate.extend(data[i+50:i+50+10])
+        dataValidate.extend(data[i+100:i+100+10])
+        # i is the pivot. i, i+50, i+100
+        # this is 'manual'. I am sure there is better solution.
+        dataTrain = list()
+        data_temp1 = data[0:50]
+        del data_temp1[i:i+10]
+        dataTrain.extend(data_temp1)
+        data_temp2 = data[50:100]
+        del data_temp2[i:i+10]
+        dataTrain.extend(data_temp2)
+        data_temp3 = data[100:150]
+        del data_temp3[i:i+10]
+        dataTrain.extend(data_temp3)
+        
+        # At this point we have data ready to be classifed for Kth fold.
