@@ -59,6 +59,7 @@ def EuclideanD(Mypoint=[],MappedPoint=[]):
 
 if __name__ == '__main__':
     data = readCSV('Iris.csv')
+    K = int(sys.argv[1])
     for i in range(0, 50, 10):
         # Validation split
         print('Fold ', int(i/10 +1)) 
@@ -87,7 +88,7 @@ if __name__ == '__main__':
                 #print(distance)
                 distanceList.append([distance, trainPoint, testPoint])
             distanceList.sort(key=lambda dist: dist[0])
-            topK = distanceList[:15]
+            topK = distanceList[:K]
             for j in topK: print(j)
             print('='*24)
             #print(distanceList)
