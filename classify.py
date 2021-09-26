@@ -39,6 +39,22 @@ def readCSV(filename)-> list:
                 exit(1)
     return data
 
+#manual hack
+def vote(topK:list[list]):
+    seto = 0
+    vers = 0
+    virg = 0
+    for entry in topK:
+        label = entry[1][4]
+        if label == 'Iris-setosa': seto += 1
+        elif label == 'Iris-versicolor': vers += 1
+        elif label == 'Iris-virginica': virg += 1
+        else: raise ValueError
+    counts = list()
+    counts.append([seto,'Iris-setosa']); counts.append([vers, 'Iris-versicolor'])
+    counts.append([virg, 'Iris-virginica'])
+    counts.sort(reverse=True, key=lambda count: count[0])
+    return counts[0][1]
 
 def NearestNieghbor(training:list, test:list) -> int:
     # Perform L2 distance (Sum of squared diff)
@@ -58,14 +74,16 @@ def EuclideanD(Mypoint=[],MappedPoint=[]):
 
 if __name__ == '__main__':
     data = readCSV('Iris.csv')
+    predictions = list()
     try:
         K = int(sys.argv[1])
     except IndexError:
         K = 3 # Default
     # This is highly not scalable.
+    print('K: ', K)
     for i in range(0, 50, 10):
         # Validation split
-        print('Fold ', int(i/10 +1)) 
+        #print('Fold ', int(i/10 +1)) 
         dataValidate = list()
         dataValidate = data[i:i+10]
         dataValidate.extend(data[i+50:i+50+10])
@@ -82,7 +100,7 @@ if __name__ == '__main__':
         data_temp3 = data[100:150]
         del data_temp3[i:i+10]
         dataTrain.extend(data_temp3)
-        
+
         # At this point we have data ready to be classifed for Kth fold.
         for i, testPoint in enumerate(dataValidate):
             distanceList = list() # This list should mapped directly to dataValidate list
@@ -92,6 +110,18 @@ if __name__ == '__main__':
                 distanceList.append([distance, trainPoint, testPoint])
             distanceList.sort(key=lambda dist: dist[0])
             topK = distanceList[:K]
-            for j in topK: print(j)
-            print('='*24)
+            #for j in topK: 
+                #print(j)
+            label = vote(topK)
+            #print(label)
+            predictions.append([label, testPoint[4], label == testPoint[4]]) # Pred, Actual, correct
+            # Again redundant. For time.
+            #print()
+        #print('='*24)
             #print(distanceList)
+    TPCount = 0
+    for i in predictions: 
+        #print(i)
+        if i[2]: TPCount += 1
+    print('Accuracy: ', (TPCount/len(predictions)*100))
+    print()

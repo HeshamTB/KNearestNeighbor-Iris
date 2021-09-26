@@ -1,0 +1,90 @@
+K:  3
+Accuracy:  96.66666666666667
+
+K:  5
+Accuracy:  97.33333333333334
+
+K:  7
+Accuracy:  98.0
+
+K:  9
+Accuracy:  97.33333333333334
+
+K:  11
+Accuracy:  98.0
+
+K:  13
+Accuracy:  97.33333333333334
+
+K:  15
+Accuracy:  96.66666666666667
+
+K:  17
+Accuracy:  96.66666666666667
+
+K:  19
+Accuracy:  96.66666666666667
+
+K:  21
+Accuracy:  96.66666666666667
+
+K:  23
+Accuracy:  96.0
+
+K:  25
+Accuracy:  96.0
+
+K:  27
+Accuracy:  94.66666666666667
+
+K:  29
+Accuracy:  93.33333333333333
+
+K:  31
+Accuracy:  93.33333333333333
+
+K:  33
+Accuracy:  94.0
+
+K:  35
+Accuracy:  95.33333333333334
+
+K:  37
+Accuracy:  94.66666666666667
+
+K:  39
+Accuracy:  94.0
+
+K:  41
+Accuracy:  94.0
+
+K:  43
+Accuracy:  94.0
+
+K:  45
+Accuracy:  94.0
+
+K:  47
+Accuracy:  92.66666666666666
+
+K:  49
+Accuracy:  94.0
+
+K:  51
+Accuracy:  92.0
+
+K:  53
+Accuracy:  91.33333333333333
+
+K:  55
+Accuracy:  90.66666666666666
+
+K:  57
+Accuracy:  89.33333333333333
+
+K:  59
+Accuracy:  88.66666666666667
+
+K:  61
+Accuracy:  89.33333333333333
+
