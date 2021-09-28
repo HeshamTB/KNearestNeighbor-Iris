@@ -39,6 +39,21 @@ def readCSV(filename)-> list:
                 exit(1)
     return data
 
+def parseOptions():
+    try:
+        K = int(sys.argv[1])
+    except IndexError:
+        K = 3 # Default
+    try:
+        distanceType = sys.argv[2]
+        if distanceType == 'L1': distanceFunc = ManhattanD
+        elif distanceType == 'L2': distanceFunc = EuclideanD
+        else: raise
+    except:
+        print('Enter distance type (L1 or L2)')
+        exit(1)
+    return K, distanceFunc
+
 #manual hack
 def vote(topK:list[list]):
     seto = 0
@@ -72,13 +87,14 @@ def EuclideanD(Mypoint=[],MappedPoint=[]):
         math.pow((MappedPoint[3]-Mypoint[3]),2))
     return Distance
 
+def ManhattanD(Mypoint=[],MappedPoint=[]):
+    Distance=(abs(MappedPoint[0]-Mypoint[0]))+(abs(MappedPoint[1]-Mypoint[1]))+(abs(MappedPoint[2]-Mypoint[2]))+(abs(MappedPoint[3]-Mypoint[3]))
+    return Distance
+
 if __name__ == '__main__':
     data = readCSV('Iris.csv')
     predictions = list()
-    try:
-        K = int(sys.argv[1])
-    except IndexError:
-        K = 3 # Default
+    K, distanceFunc = parseOptions()
     # This is highly not scalable.
     print('K: ', K)
     for i in range(0, 50, 10):
@@ -105,8 +121,10 @@ if __name__ == '__main__':
         for i, testPoint in enumerate(dataValidate):
             distanceList = list() # This list should mapped directly to dataValidate list
             for j, trainPoint in enumerate(dataTrain): # For every train point
-                distance = EuclideanD(testPoint, trainPoint) # L2 distance
+                #distance = EuclideanD(testPoint, trainPoint) # L2 distance
+                #distance = ManhattanD(testPoint, trainPoint)
                 #print(distance)
+                distance = distanceFunc(testPoint, trainPoint)
                 distanceList.append([distance, trainPoint, testPoint])
             distanceList.sort(key=lambda dist: dist[0])
             topK = distanceList[:K]
